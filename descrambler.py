@@ -34,7 +34,7 @@ with open(os.path.join(os.getcwd(), "result"), "w+b") as fd:
 
 gamma = gamma_generator((1020 - 128) * 8)  # размер в битах
 output_file = open(os.path.join(os.getcwd(), "result"), "w+b")
-with open(os.path.join(os.getcwd(), "NOAA-20.raw"), "r+b") as input_file:
+with open(os.path.join(os.getcwd(), "FY-3B.raw"), "r+b") as input_file:
     mm = mmap.mmap(input_file.fileno(), 0)
     while True:
         index = mm.find(b'\x1a\xcf\xfc\x1d')
@@ -49,6 +49,7 @@ with open(os.path.join(os.getcwd(), "NOAA-20.raw"), "r+b") as input_file:
 
         # дескремблируем тело CADU
         body = unscrambled_body ^ gamma
+        # body = unscrambled_body
 
         # TODO: сделать проверку по кодам RS
 
